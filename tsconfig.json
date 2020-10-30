@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "es2018",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "lib": ["esnext", "dom"],
+    "strict": true,
+    "esModuleInterop": false,
+    "allowSyntheticDefaultImports": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "experimentalDecorators": true,
+    "noEmit": true,
+    "sourceMap": true,
+    "importHelpers": true,
+    "inlineSources": true,
+    "rootDir": "./",
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": []
+}
