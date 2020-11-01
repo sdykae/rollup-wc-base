@@ -17,9 +17,10 @@
     "importHelpers": true,
     "inlineSources": true,
     "rootDir": "./",
+    // "allowJs": true
   },
   "include": [
-    "src/**/*.ts"
+    "src/**/*.ts",
   ],
   "exclude": []
 }
