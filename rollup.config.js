@@ -3,6 +3,8 @@ import babel from '@rollup/plugin-babel';
 import common from '@rollup/plugin-commonjs';
 import serve from 'rollup-plugin-serve';
 import livereload from 'rollup-plugin-livereload';
+import bundleScss from 'rollup-plugin-bundle-scss';
+// import postcss from 'rollup-plugin-postcss';
 import postcss from 'rollup-plugin-postcss';
 import postcssLit from 'rollup-plugin-postcss-lit';
 import path from 'path';
@@ -10,6 +12,11 @@ import { terser } from 'rollup-plugin-terser';
 import {Plugin} from 'rollup';
 import litcss from 'rollup-plugin-lit-css';
 import  postcssPresetEnv from 'postcss-preset-env';
+import  atImport from "postcss-import";
+import styles from "rollup-plugin-styles";
+
+import scss from "rollup-plugin-scss";
+
 // const asdf : Plugin
 
 // import litcss from 'rollup-plugin-lit-css';
@@ -121,48 +128,107 @@ export default {
     resolve({ extensions, browser: true }),
     common(),
     babel(babelConf),
-    postcss({
-      inject: false, // By default postcss also injects the
-      plugins:[
-        postcssPresetEnv({
-          autoprefixer: { /** ie but not a good idea */
-            grid: true 
-          },
-          // "production": [
-          //   ">0.2%",
-          //   "not dead",
-          //   "not op_mini all"
-          // ],
-          // "development": [
-          //   "last 1 chrome version",
-          //   "last 1 firefox version",
-          //   "last 1 safari version",
-          //   "last 1 ie version"
-          // ],
-          // browsers: 'IE 11'
-          // browsers: 'Chrome >= 61 or Safari >= 10.1 or Edge >= 16 or iOS >= 10.3 or Firefox >= 60 or Opera >= 48 or Android >= 61 or ChromeAndroid >= 61 or FirefoxAndroid >= 60 or OperaMobile >= 45 or Samsung >= 8'
-        })
-      ],
-      extensions:[".sass",".scss",".css"],
-      extract: false,
-      minimize: true,
-      use: [
-        ['sass', {
-          includePaths: [
-            './theme',
+
+
+
+// //POSTCSS START
+    // postcss({
+    //   inject: false, // By default postcss also injects the
+    //   plugins:[
+    //     // atImport({
+    //     //   path: [
+    //     //     './theme',
+    //     //     './node_modules',
+    //     //     './src/theme',
+    //     //     path.resolve(__dirname, "..", "node_modules"),
+    //     //     path.resolve(__dirname,"node_modules")
+    //     //   ]
+    //     // }),
+    //     postcssPresetEnv({
+    //       autoprefixer: { /** ie but not a good idea */
+    //         grid: true 
+    //       },
+    //       // "production": [
+    //       //   ">0.2%",
+    //       //   "not dead",
+    //       //   "not op_mini all"
+    //       // ],
+    //       // "development": [
+    //       //   "last 1 chrome version",
+    //       //   "last 1 firefox version",
+    //       //   "last 1 safari version",
+    //       //   "last 1 ie version"
+    //       // ],
+    //       // browsers: 'IE 11'
+    //       // browsers: 'Chrome >= 61 or Safari >= 10.1 or Edge >= 16 or iOS >= 10.3 or Firefox >= 60 or Opera >= 48 or Android >= 61 or ChromeAndroid >= 61 or FirefoxAndroid >= 60 or OperaMobile >= 45 or Samsung >= 8'
+    //     })
+    //   ],
+    //   parser: 'postcss-sass',
+    //   extensions:[".sass",".scss",".css"],
+    //   extract: false,
+    //   minimize: true,
+    //   use: [
+    //     ['sass', {
+    //       includePaths: [
+    //         // './theme',
+    //         'node_modules',
+    //         // './src/theme',
+    //         // path.resolve(__dirname, "..", "node_modules"),
+    //         // path.resolve(__dirname,"node_modules")
+    //       ],
+    //     }]
+    //   ],
+    //   // exclude: ["./node_modules/bootstrap"]
+    //   // extensions:[],
+    //   // plugins: [],
+    //   // modules: true,
+    //   // extract: true
+    // }),
+// POSTCSS END
+    // styles(),
+    // styles({
+    //   // parser: require('sass').renderSync,
+    //   // config:{
+    //   //   ctx:{
+    //   //     extract: false
+    //   //   }
+
+    //   // },
+    //   dts: true,
+    //   extensions: ['.sass',".scss",".css"],
+    //   // modules: false,
+    //   // import: {
+    //   //   resolve: path.resolve(__dirname,"./node_modules")
+    //   // },
+    //   mode: "extract",
+    //   // sass: {
+    //   //   impl: 'sass',
+    //   //   fiber: require('fibers'),
+    //   //   includePaths: [
+    //   //     'node_modules'
+    //   //   ]
+    //   // },
+    //   use: ['sass']
+    // }),
+      //bundleScss(),
+    scss({
+        // extensions: ['.sass',".scss",".css"],
+        // output: "./scc/css/style.css",
+        output: false,
+      failOnError: true,
+      sass: require("sass"),
+      includePaths:[
+                  // './theme',
             './node_modules',
-            './src/theme',
-            // path.resolve(__dirname, "..", "node_modules"),
-            // path.resolve(__dirname,"node_modules")
-          ],
-        }]
-      ],
-      // exclude: ["./node_modules/bootstrap"]
-      // extensions:[],
-      // plugins: [],
-      // modules: true,
-      // extract: true
+            './src',
+              // path.resolve(__dirname, "..", "node_modules"),
+              // path.resolve(__dirname,"node_modules")  
+      ]
     }),
+    // litcss({
+    //   include: ['**/*.scss'] 
+    // }),
+    // postcssLit(),
     production && terser({output: {comments: false,source_map:false}}),
     // litcss({ uglify: true })
   ],

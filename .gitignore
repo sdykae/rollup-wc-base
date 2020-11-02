@@ -5,3 +5,4 @@ test/integration/screenshots-current/
 _site/
 .DS_Store
 yarn.lock
+rollup-plugin-postcss
