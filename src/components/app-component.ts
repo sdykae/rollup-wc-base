@@ -1,14 +1,6 @@
 console.log("BREAK-P")
 import { LitElement, html, css, property,CSSResult, unsafeCSS } from 'lit-element';
-// import {AppStyles} from './app-component.sass';
-// import {style}  from '../styles/styles.css';
-// import {styles} from '../styles/styles.css';
 import something from '../components/app-component.scss';
-// export {default as stylees} from '../components/app-component.scss';
-// import {styless} from './css-importer';
-// import {styless} from './css-importer';
-// import './app-component.scss';
-// console.log(styleee, "EMIT");
 
 import {MDCTextField} from '@material/textfield/index';
 // import { styless } from './css-importer';
