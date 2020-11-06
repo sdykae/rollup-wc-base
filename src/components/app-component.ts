@@ -1,10 +1,9 @@
 console.log("BREAK-P")
-import { LitElement, html, css, property,CSSResult, unsafeCSS } from 'lit-element';
+import { LitElement, html, css, property,CSSResult, unsafeCSS, PropertyValues } from 'lit-element';
 import something from '../components/app-component.scss';
 
 import {MDCTextField} from '@material/textfield/index';
 // import { styless } from './css-importer';
-console.log(something)
 export class AppComponent extends LitElement {
 
   @property({ type: String }) page = 'main';
@@ -22,17 +21,21 @@ export class AppComponent extends LitElement {
   ];
   connectedCallback() {
     super.connectedCallback();
-    console.log(this.shadowRoot?.querySelector('#my-label-id'))
-    console.log(this.shadowRoot?.querySelector('my-label-id'))
-    console.log(this.shadowRoot?.querySelector('label'))
   }
-  firstUpdated() {
-    super.firstUpdated();
+  firstUpdated(a: PropertyValues<this>) {
+    super.firstUpdated(a);
+    a.get('title')
+    console.log(a.get('page'))
+    a.forEach((oldValue, propName) => {
+      console.log(`${propName} changed. oldValue: ${oldValue}`);
+    });
     // const textField = new MDCTextField(this.shadowRoot?.querySelect('.mdc-text-field'));
     console.log(this.shadowRoot?.querySelector('#my-label-id'))
     console.log(this.shadowRoot?.querySelector('my-label-id'))
     console.log(this.shadowRoot?.querySelector('.mdc-text-field'))
-    new MDCTextField((this.shadowRoot?.querySelector('.mdc-text-field')))
+    const mdcText= this.shadowRoot?.querySelector('.mdc-text-field')
+
+    new MDCTextField(mdcText)
   }
 
   render() {

@@ -36,7 +36,7 @@ const babelRc = {
         // useBuiltIns: 'usage', /**ie support */
         useBuiltIns: false,
         // corejs: 3, /**ie support */
-        // debug: true
+        debug: true
       }
     ],
     // [
@@ -112,7 +112,7 @@ export default {
     // format: 'esm',
     name: 'app',
     format: 'iife',
-    sourcemap: false
+    sourcemap: true
   },
   plugins: [
     serve({

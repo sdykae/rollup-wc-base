@@ -4,33 +4,19 @@
   // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
-
     {
-      // "type": "pwa-node",
       "type": "firefox",
       "request": "attach",
-      "name": "Launch Program",
+      "name": "Firefox Debug",
       "url": "http://192.168.126.136:8001",
-      "webRoot": "${workspaceFolder}", 
-      // "skipFiles": [
-      //   "<node_internals>/**"
-      //   // "node_modules/**"
-      // ],
-      // "host": "192.168.126.1",
-      "port":9922,
-      // "reAttach": true,
-      // "program": "${workspaceFolder}/src/components/app-component.ts",
-      // "outFiles": [
-        // "${workspaceFolder}/**/*.js"
-      // ],
-      // "runtimeExecutable": "yarn",
-      // "runtimeArgs": [
-      //   "start"
-      // ],
-      // "resolveSourceMapLocations": [
-      //   "${workspaceFolder}/**",
-      //   "!**/node_modules/**"
-      // ],
+      "webRoot": "${workspaceFolder}",
+      "port": 9922,
+      "pathMappings": [
+        {
+          "url": "http://192.168.126.136:8001",
+          "path": "${workspaceFolder}"
+        }
+      ]
     },
     {
       "type": "edge",
@@ -38,7 +24,7 @@
       "name": "Attach to Microsoft Edge",
       "port": 9222,
       "webRoot": "${workspaceFolder}",
-      "url": "http://192.168.126.136:8001",
-  }
+      "url": "http://192.168.126.136:8001"
+    }
   ]
 }

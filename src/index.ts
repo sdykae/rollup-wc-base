@@ -12,5 +12,5 @@
  */
 
 
-import { AppComponent } from './components/app-component';
-customElements.define('app-wc', AppComponent);
+import { DropdownComponent } from './components/dropdown/dropdown.component';
+customElements.define('test-name', DropdownComponent);
