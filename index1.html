@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <title>reCAPTCHA demo: Explicit render for multiple widgets</title>
+    <script type="text/javascript">
+
+
+
+var verifyCallback= function(response) {
+        alert(response);
+      };
+
+
+
+      var onloadCallback = function() {
+        grecaptcha.render(document.getElementById('example3'), {
+          'sitekey' : '6LfpBuAZAAAAANn2NPOc1dgBUXaxrlx11J1zK2J7',
+          'callback' : 'verifyCallback',
+          'theme' : 'dark'
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <br>
+    <!-- POSTs back to the page's URL upon submit with a g-recaptcha-response POST parameter. -->
+
+      <div id="example3"></div>
+      <br>
+
+
+    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+        async defer>
+    </script>
+  </body>
+</html>

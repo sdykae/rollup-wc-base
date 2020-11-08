@@ -1,3 +1,4 @@
+import { RechaptaComponent } from './components/rechapta/rechapta.component';
 /**
  * ENABLE IF IE THINGS
  */
@@ -12,5 +13,4 @@
  */
 
 
-import { DropdownComponent } from './components/dropdown/dropdown.component';
-customElements.define('test-name', DropdownComponent);
+customElements.define('test-name', RechaptaComponent);
