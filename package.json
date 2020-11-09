@@ -17,13 +17,11 @@
     "@babel/plugin-transform-template-literals": "^7.12.1",
     "@babel/preset-env": "^7.12.1",
     "@babel/preset-typescript": "^7.12.1",
-    "@material/base": "^7.0.0",
     "@rollup/plugin-babel": "^5.2.1",
     "@rollup/plugin-commonjs": "^16.0.0",
     "@rollup/plugin-node-resolve": "^10.0.0",
     "@typescript-eslint/eslint-plugin": "^4.6.0",
     "@typescript-eslint/parser": "^4.6.0",
-    "dart-sass": "^1.25.0",
     "eslint": "^7.12.1",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-config-prettier": "^6.15.0",
@@ -40,6 +38,7 @@
     "rollup-plugin-bundle-scss": "^0.1.2",
     "rollup-plugin-lit-css": "^2.0.5",
     "rollup-plugin-livereload": "^2.0.0",
+    "rollup-plugin-pnp-resolve": "^2.0.0",
     "rollup-plugin-postcss-lit": "^1.0.1",
     "rollup-plugin-scss": "^2.6.1",
     "rollup-plugin-serve": "^1.0.4",
@@ -57,22 +56,71 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.12.1",
-    "@fluentui/web-components": "^0.7.0",
-    "@material/floating-label": "^7.0.0",
-    "@material/line-ripple": "^7.0.0",
-    "@material/notched-outline": "^8.0.0",
+    "@material/list": "^8.0.0",
     "@material/select": "^8.0.0",
-    "@material/textfield": "^7.0.0",
-    "@microsoft/fast-components": "^1.11.1",
-    "@microsoft/fast-element": "^0.19.1",
     "@webcomponents/webcomponentsjs": "^2.5.0",
     "bootstrap": "^4.5.3",
     "core-js": "^3.6.5",
     "lit-element": "^2.4.0",
     "lodash-es": "^4.17.15",
     "regenerator-runtime": "^0.13.7",
-    "rollup-plugin-postcss": "file:./rollup-plugin-postcss/",
     "string-to-template-literal": "^0.2.2",
     "whatwg-fetch": "^3.4.1"
+  },
+  "dependenciesMeta": {
+    "@material/animation@8.0.0": {
+      "unplugged": true
+    },
+    "@material/base@8.0.0": {
+      "unplugged": true
+    },
+    "@material/density@8.0.0": {
+      "unplugged": true
+    },
+    "@material/dom@8.0.0": {
+      "unplugged": true
+    },
+    "@material/elevation@8.0.0": {
+      "unplugged": true
+    },
+    "@material/feature-targeting@8.0.0": {
+      "unplugged": true
+    },
+    "@material/floating-label@8.0.0": {
+      "unplugged": true
+    },
+    "@material/line-ripple@8.0.0": {
+      "unplugged": true
+    },
+    "@material/list@8.0.0": {
+      "unplugged": true
+    },
+    "@material/menu@8.0.0": {
+      "unplugged": true
+    },
+    "@material/menu-surface@8.0.0": {
+      "unplugged": true
+    },
+    "@material/notched-outline@8.0.0": {
+      "unplugged": true
+    },
+    "@material/ripple@8.0.0": {
+      "unplugged": true
+    },
+    "@material/rtl@8.0.0": {
+      "unplugged": true
+    },
+    "@material/select@8.0.0": {
+      "unplugged": true
+    },
+    "@material/shape@8.0.0": {
+      "unplugged": true
+    },
+    "@material/theme@8.0.0": {
+      "unplugged": true
+    },
+    "@material/typography@8.0.0": {
+      "unplugged": true
+    }
   }
 }

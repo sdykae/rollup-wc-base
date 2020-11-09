@@ -1,23 +1,28 @@
 import resolve from '@rollup/plugin-node-resolve';
+// const resolve = require(`rollup-plugin-pnp-resolve`);
 import babel from '@rollup/plugin-babel';
 import common from '@rollup/plugin-commonjs';
 import serve from 'rollup-plugin-serve';
 import livereload from 'rollup-plugin-livereload';
 import bundleScss from 'rollup-plugin-bundle-scss';
 // import postcss from 'rollup-plugin-postcss';
-import postcss from 'rollup-plugin-postcss';
+// import postcss from 'rollup-plugin-postcss';
 import postcssLit from 'rollup-plugin-postcss-lit';
 import path from 'path';
 import { terser } from 'rollup-plugin-terser';
 import {Plugin} from 'rollup';
 import litcss from 'rollup-plugin-lit-css';
 import  postcssPresetEnv from 'postcss-preset-env';
-import  atImport from "postcss-import";
+// import  atImport from "postcss-import";
 import styles from "rollup-plugin-styles";
 
 import scss from "rollup-plugin-scss";
+import { readdirSync } from 'fs';
 
 // const asdf : Plugin
+
+
+
 
 // import litcss from 'rollup-plugin-lit-css';
 const production = !process.env.ROLLUP_WATCH;
@@ -213,16 +218,26 @@ export default {
       //bundleScss(),
     scss({
         // extensions: ['.sass',".scss",".css"],
+        // ['/**/*.css', '/**/*.scss', '/**/*.sass']
         // output: "./scc/css/style.css",
         output: false,
       failOnError: true,
       sass: require("sass"),
       includePaths:[
                   // './theme',
-            './node_modules',
-            './src',
+            // /.yarn\/unplugged\/@material-list-npm-8.0.0-e6093bab51\/node_modules/
+            // "./.yarn/unplugged/@material-list-npm-8.0.0-e6093bab51/node_modules"
+            "./.yarn/unplugged",
+            ...(
+              readdirSync('./.yarn/unplugged/',{withFileTypes:true})
+              .filter(dirent=>dirent.isDirectory())
+              .map(dirent=> `./.yarn/unplugged/${dirent.name}/node_modules`)
+            )
+            // './.yarn/unplugged/@material-**/node_modules/'
+            // './src',
               // path.resolve(__dirname, "..", "node_modules"),
               // path.resolve(__dirname,"node_modules")  
+            // './yarn'
       ]
     }),
     // litcss({

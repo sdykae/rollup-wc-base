@@ -43,11 +43,14 @@ export class RechaptaComponent extends LitElement {
         // 'sitekey' : '6LfpBuAZAAAAANn2NPOc1dgBUXaxrlx11J1zK2J7',
         // 'callback' : 'verifyCallback'
       // });
+    // @ts-ignore
       window.onloadCallback = function() {
+    // @ts-ignore
         window.grecaptcha.render(this.shadowRoot?.getElementById('html_element'), {
           'sitekey' : '6LfpBuAZAAAAANn2NPOc1dgBUXaxrlx11J1zK2J7',
           'callback' : 'verifyCallback',
           'theme' : 'dark'
+    // @ts-ignore
         }).bind(this);
       }.bind(this);
 
