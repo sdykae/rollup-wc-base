@@ -1,64 +1,119 @@
-<html>
+<!doctype html>
+<html lang="en">
   <head>
-    <title>reCAPTCHA demo: Explicit render for multiple widgets</title>
+    
+    <!-- <script src="node_modules/@webcomponents/webcomponentsjs/@webcomponents/custom-elementswebcomponents-loader.js"></script> -->
+    <!-- <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script> -->
+    <!-- <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script> -->
+  <!-- <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script> -->
+<!-- <script src="node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js"></script> -->
+<!-- <script src="webcomponents/webcomponents-loader.js"></script> -->
+<!-- <script> -->
+  <!-- if (!window.customElements) { document.write('<!--'); } -->
+<!-- </script> -->
+<!-- <script src="webcomponents/custom-elements-es5-adapter.js"></script> -->
+<!-- ! DO NOT REMOVE THIS COMMENT, WE NEED ITS CLOSING MARKER -->
     <meta charset="utf-8">
-    <script type="text/javascript">
+    <title>My app</title>
+    <meta name="viewport" content="user-scalable=no,maximum-scale=1, width=device-width, initial-scale=1.0" />
 
+    <meta name="generator" content="PWA Starter Kit">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+    <meta name="description" content="My App description">
 
+    <base href="/">
 
-      var verifyCallback= function(response) {
-        alert(response);
-      };
+    <link rel="icon" href="./favicon.png">
 
+    <!-- See https://goo.gl/OOhYW5 -->
+    <!-- <link rel="manifest" href="manifest.json"> -->
 
+    <!-- See https://goo.gl/qRE0vM -->
+    <meta name="theme-color" content="#3f51b5">
 
-      var onloadCallback = function() {
-        grecaptcha.render(document.getElementById('example3'), {
-          'sitekey' : '6LfpBuAZAAAAANn2NPOc1dgBUXaxrlx11J1zK2J7',
-          'callback' : 'verifyCallback',
-          'theme' : 'dark'
-        });
-      };
-      function sendData(){
-        const token = grecaptcha.getResponse()
-        fetch('http://0.0.0.0:5012/api/search',{
-          method: 'POST', // *GET, POST, PUT, DELETE, etc.
-    // mode: 'cors', // no-cors, *cors, same-origin
-    // cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-    // credentials: 'same-origin', // include, *same-origin, omit
-    headers: {
-      'Content-Type': 'application/json',
-      'Recaptcha-Auth': `${token}`
-      // 'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    // redirect: 'follow', // manual, *follow, error
-    // referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-    body: JSON.stringify({
-  "invoiceTypeId": "F",
-  "documentIdentityType": "RUC",
-  "documentNumber": "3453453453",
-  "serialNumber": "F343",
-  "secuenceNumber": "34343",
-  "total": 34.00,
-  "issueDate": "1604683974",
+    <!-- Add to homescreen for Chrome on Android. Fallback for manifest.json -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="My App">
 
- })
-    // body: JSON.stringify(token)
-        }).then((res)=>res.json()).then(x=>console.log(x))
-        // getcaptcha
-      }
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="My App">
+
+    <!-- Homescreen icons -->
+    <!-- <link rel="apple-touch-icon" href="images/manifest/icon-48x48.png"> -->
+    <!-- <link rel="apple-touch-icon" sizes="72x72" href="images/manifest/icon-72x72.png"> -->
+    <!-- <link rel="apple-touch-icon" sizes="96x96" href="images/manifest/icon-96x96.png"> -->
+    <!-- <link rel="apple-touch-icon" sizes="144x144" href="images/manifest/icon-144x144.png"> -->
+    <!-- <link rel="apple-touch-icon" sizes="192x192" href="images/manifest/icon-192x192.png"> -->
+
+    <!-- Tile icon for Windows 8 (144x144 + tile color) -->
+    <!-- <meta name="msapplication-TileImage" content="images/manifest/icon-144x144.png"> -->
+    <meta name="msapplication-TileColor" content="#3f51b5">
+    <meta name="msapplication-tap-highlight" content="no">
+
+    <!-- Default twitter cards -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@username">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="my-app">
+    <!-- <meta property="og:image" content="images/manifest/icon-144x144.png" /> -->
+
+    <!-- Performance tip: hint to the browser to start the handshake for the fonts site -->
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <!-- <link href="./dist/index.css"> -->
+    <script>
+      // Load and register pre-caching Service Worker
+      // if ('serviceWorker' in navigator) {
+      //   window.addEventListener('load', function() {
+      //     navigator.serviceWorker.register('service-worker.js', {
+      //       scope: '/',
+      //     });
+      //   });
+      // }
+
+      // Redux assumes `process.env.NODE_ENV` exists in the ES module build.
+      // https://github.com/reactjs/redux/issues/2907
+      window.process = { env: { NODE_ENV: 'production' } };
     </script>
+
+    <!-- Add any global styles for body, document, etc. -->
+    <style>
+      @font-face {
+        font-family: 'Pacifico';
+        font-style: normal;
+        font-weight: 400;
+        src: local('Pacifico Regular'), local('Pacifico-Regular'), url(https://fonts.gstatic.com/s/pacifico/v12/Q_Z9mv4hySLTMoMjnk_rCXYhjbSpvc47ee6xR_80Hnw.woff2) format('woff2');
+        /* The browser draws the text immediately in the fallback font if the font
+           isn't loaded, then swaps it with the webfont when it eventually loads
+           See: https://developers.google.com/web/updates/2016/02/font-display
+        */
+        font-display: swap;
+      }
+      body {
+        margin: 0;
+        /* This is a font-stack that tries to use the system-default sans-serifs first */
+        font-family: Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+        line-height: 1.5;
+        min-height: 100vh;
+        -webkit-font-smoothing: antialiased;
+      }
+    </style>
   </head>
   <body>
-    <br>
-    <!-- POSTs back to the page's URL upon submit with a g-recaptcha-response POST parameter. -->
-
-      <div id="example3"></div>
+    <!-- <script src="../node_modules/construct-style-sheets-polyfill/dist/adoptedStyleSheets.js"></script> -->
+    <!-- <my-app appTitle="my app"></my-app> -->
+    <!-- <app-wc appTitle="my app"></app-wc> -->
+    <test-name appTitle="my app"></test-name>
+    <!-- <script type="module" src="dist/index.js" ></script> -->
+    <div id="root"></div>
+    <div id="example3"></div>
       <br>
-      <button onclick="sendData()">send Me</button>
-
-    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
-        async defer>
+    <script  src="dist/index.js" ></script>
     </script>
+    <noscript>
+      Please enable JavaScript to view this website.
+    </noscript>
+  <!-- <script src="node_modules/@webcomponents/webcomponentsjs/bundles/webcomponents-sd-ce-pf.js"></script> -->
   </body>
 </html>

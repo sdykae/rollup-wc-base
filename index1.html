@@ -1,0 +1,64 @@
+<html>
+  <head>
+    <title>reCAPTCHA demo: Explicit render for multiple widgets</title>
+    <meta charset="utf-8">
+    <script type="text/javascript">
+
+
+
+      var verifyCallback= function(response) {
+        alert(response);
+      };
+
+
+
+      var onloadCallback = function() {
+        grecaptcha.render(document.getElementById('example3'), {
+          'sitekey' : '6LfpBuAZAAAAANn2NPOc1dgBUXaxrlx11J1zK2J7',
+          'callback' : 'verifyCallback',
+          'theme' : 'dark'
+        });
+      };
+      function sendData(){
+        const token = grecaptcha.getResponse()
+        fetch('http://0.0.0.0:5012/api/search',{
+          method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    // mode: 'cors', // no-cors, *cors, same-origin
+    // cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    // credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+      'Content-Type': 'application/json',
+      'Recaptcha-Auth': `${token}`
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    // redirect: 'follow', // manual, *follow, error
+    // referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    body: JSON.stringify({
+  "invoiceTypeId": "F",
+  "documentIdentityType": "RUC",
+  "documentNumber": "3453453453",
+  "serialNumber": "F343",
+  "secuenceNumber": "34343",
+  "total": 34.00,
+  "issueDate": "1604683974",
+
+ })
+    // body: JSON.stringify(token)
+        }).then((res)=>res.json()).then(x=>console.log(x))
+        // getcaptcha
+      }
+    </script>
+  </head>
+  <body>
+    <br>
+    <!-- POSTs back to the page's URL upon submit with a g-recaptcha-response POST parameter. -->
+
+      <div id="example3"></div>
+      <br>
+      <button onclick="sendData()">send Me</button>
+
+    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+        async defer>
+    </script>
+  </body>
+</html>

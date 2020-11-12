@@ -74,7 +74,8 @@ const babelConf = {
     /regenerator-runtime/,
     // /core-js\/stable/,
     /@webcomponents\/webcomponentsjs/,
-    /whatwg-fetch/
+    /whatwg-fetch/,
+    /typescript/
     // /(?!(lit-element|lit-html)\/).*/
     // /node_modules\/(?!(lit-element|lit-html)\/).*/
   ],
