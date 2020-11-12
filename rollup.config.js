@@ -1,48 +1,46 @@
-import resolve from '@rollup/plugin-node-resolve';
+import resolve from "@rollup/plugin-node-resolve";
 // const resolve = require(`rollup-plugin-pnp-resolve`);
-import babel from '@rollup/plugin-babel';
-import common from '@rollup/plugin-commonjs';
-import serve from 'rollup-plugin-serve';
-import livereload from 'rollup-plugin-livereload';
-import bundleScss from 'rollup-plugin-bundle-scss';
+import babel from "@rollup/plugin-babel";
+import common from "@rollup/plugin-commonjs";
+import serve from "rollup-plugin-serve";
+import livereload from "rollup-plugin-livereload";
+import bundleScss from "rollup-plugin-bundle-scss";
 // import postcss from 'rollup-plugin-postcss';
 // import postcss from 'rollup-plugin-postcss';
-import postcssLit from 'rollup-plugin-postcss-lit';
-import path from 'path';
-import { terser } from 'rollup-plugin-terser';
-import {Plugin} from 'rollup';
-import litcss from 'rollup-plugin-lit-css';
-import  postcssPresetEnv from 'postcss-preset-env';
+import postcssLit from "rollup-plugin-postcss-lit";
+import path from "path";
+import { terser } from "rollup-plugin-terser";
+import { Plugin } from "rollup";
+import litcss from "rollup-plugin-lit-css";
+import postcssPresetEnv from "postcss-preset-env";
 // import  atImport from "postcss-import";
 import styles from "rollup-plugin-styles";
 
 import scss from "rollup-plugin-scss";
-import { readdirSync } from 'fs';
+import { readdirSync } from "fs";
+import replace from "@rollup/plugin-replace";
 
 // const asdf : Plugin
 
-
-
-
 // import litcss from 'rollup-plugin-lit-css';
 const production = !process.env.ROLLUP_WATCH;
-const extensions = ['.js', '.jsx', '.ts', '.tsx', '.m.js'];
+const extensions = [".js", ".jsx", ".ts", ".tsx", ".m.js"];
 const babelRc = {
   presets: [
     [
-      '@babel/preset-env',
+      "@babel/preset-env",
       {
-        modules: false, /**ie support */
+        modules: false /**ie support */,
         // targets: {
-          // esmodules: true
-          // "chrome": 71
-          // ie: 11 /**ie support */
+        // esmodules: true
+        // "chrome": 71
+        // ie: 11 /**ie support */
         // },
         // useBuiltIns: 'usage', /**ie support */
         useBuiltIns: false,
         // corejs: 3, /**ie support */
-        debug: true
-      }
+        debug: true,
+      },
     ],
     // [
     //   '@babel/preset-env',
@@ -56,26 +54,24 @@ const babelRc = {
     //     corejs: 3
     //   }
     // ],
-    '@babel/preset-typescript'
+    "@babel/preset-react",
+    "@babel/preset-typescript",
   ],
   plugins: [
     // ["@babel/plugin-transform-template-literals", {
     //   "loose": true
     // }],
-    ['@babel/plugin-syntax-dynamic-import'],
-    [
-      '@babel/plugin-proposal-decorators',
-      { decoratorsBeforeExport: true }
-    ],
-    ['@babel/plugin-proposal-class-properties', { loose: true }],
+    ["@babel/plugin-syntax-dynamic-import"],
+    ["@babel/plugin-proposal-decorators", { decoratorsBeforeExport: true }],
+    ["@babel/plugin-proposal-class-properties", { loose: true }],
     // ['@babel/plugin-transform-arrow-functions', { spec: true }]
     [
-      "@babel/plugin-transform-runtime", /** not needed for current browserlist */
+      "@babel/plugin-transform-runtime" /** not needed for current browserlist */,
       {
-        regenerator: true
-      }
-    ]
-  ]
+        regenerator: true,
+      },
+    ],
+  ],
 };
 
 const babelConf = {
@@ -86,6 +82,7 @@ const babelConf = {
   exclude: [
     // /@babel(?:\/|\\{1,2})runtime|core-js/,
     // /@webcomponents/,
+    // /construct-style-sheets-polyfill/,
     /core-js/,
     /regenerator-runtime/,
     // /core-js\/stable/,
@@ -95,8 +92,8 @@ const babelConf = {
     // /node_modules\/(?!(lit-element|lit-html)\/).*/
   ],
   // include: [
-    // '/src',
-    // /(lit-element|lit-html)\/.*/
+  // '/src',
+  // /(lit-element|lit-html)\/.*/
   // ],
   // babelHelpers: "runtime",
   babelHelpers: "runtime",
@@ -104,39 +101,48 @@ const babelConf = {
 
 export default {
   // external:[
-    // /core-js\/stable/,
-    // /@babel(?:\/|\\{1,2})runtime|core-js/,
-    // /@webcomponents\/webcomponentsjs/,
-    // /whatwg-fetch/,
-    // /@webcomponents/,
-    // /node_modules\/(?!(lit-element|lit-html)\/).*/
+  // /core-js\/stable/,
+  // /@babel(?:\/|\\{1,2})runtime|core-js/,
+  // /@webcomponents\/webcomponentsjs/,
+  // /whatwg-fetch/,
+  // /@webcomponents/,
+  // /node_modules\/(?!(lit-element|lit-html)\/).*/
   // ],
-  input: 'src/index.ts',
+  input: "src/index.tsx",
   output: {
-    dir: 'dist',
+    dir: "dist",
     // format: 'esm',
-    name: 'app',
-    format: 'iife',
-    sourcemap: true
+    name: "app",
+    format: "iife",
+    sourcemap: true,
   },
   plugins: [
     serve({
-      host:'0.0.0.0',
-      contentBase: '',
-      port: 8001
+      host: "0.0.0.0",
+      contentBase: "",
+      port: 8001,
     }),
     livereload({
-      watch: 'dist'
+      watch: "dist",
     }),
     // postcssLit(),
     // litcss({include:['**/*.css','**/*.scss'],uglify:true}),
     resolve({ extensions, browser: true }),
-    common(),
+    common(
+      // {
+      // namedExports: {
+        // "node_modules/react/index.js": [
+          // "Children",
+          // "Component",
+          // "PropTypes",
+          // "createElement",
+        // ],
+        // "node_modules/react-dom/index.js": ["render"],
+      // },
+    // }
+    ),
     babel(babelConf),
-
-
-
-// //POSTCSS START
+    // //POSTCSS START
     // postcss({
     //   inject: false, // By default postcss also injects the
     //   plugins:[
@@ -151,7 +157,7 @@ export default {
     //     // }),
     //     postcssPresetEnv({
     //       autoprefixer: { /** ie but not a good idea */
-    //         grid: true 
+    //         grid: true
     //       },
     //       // "production": [
     //       //   ">0.2%",
@@ -189,7 +195,7 @@ export default {
     //   // modules: true,
     //   // extract: true
     // }),
-// POSTCSS END
+    // POSTCSS END
     // styles(),
     // styles({
     //   // parser: require('sass').renderSync,
@@ -215,39 +221,47 @@ export default {
     //   // },
     //   use: ['sass']
     // }),
-      //bundleScss(),
+    //bundleScss(),
     scss({
-        // extensions: ['.sass',".scss",".css"],
-        // ['/**/*.css', '/**/*.scss', '/**/*.sass']
-        // output: "./scc/css/style.css",
-        output: false,
+      // extensions: ['.sass',".scss",".css"],
+      // ['/**/*.css', '/**/*.scss', '/**/*.sass']
+      // output: "./scc/css/style.css",
+      output: false,
       failOnError: true,
       sass: require("sass"),
-      includePaths:[
-                  // './theme',
-            // /.yarn\/unplugged\/@material-list-npm-8.0.0-e6093bab51\/node_modules/
-            // "./.yarn/unplugged/@material-list-npm-8.0.0-e6093bab51/node_modules"
-            "./.yarn/unplugged",
-            ...(
-              readdirSync('./.yarn/unplugged/',{withFileTypes:true})
-              .filter(dirent=>dirent.isDirectory())
-              .map(dirent=> `./.yarn/unplugged/${dirent.name}/node_modules`)
-            )
-            // './.yarn/unplugged/@material-**/node_modules/'
-            // './src',
-              // path.resolve(__dirname, "..", "node_modules"),
-              // path.resolve(__dirname,"node_modules")  
-            // './yarn'
-      ]
+      // includePaths:[
+      // './theme',
+      // /.yarn\/unplugged\/@material-list-npm-8.0.0-e6093bab51\/node_modules/
+      // "./.yarn/unplugged/@material-list-npm-8.0.0-e6093bab51/node_modules"
+      // "./.yarn/unplugged", /** wea loca */
+      // ...(
+      // readdirSync('./.yarn/unplugged/',{withFileTypes:true})
+      // .filter(dirent=>dirent.isDirectory())
+      // .map(dirent=> `./.yarn/unplugged/${dirent.name}/node_modules`)
+      // )
+      // './.yarn/unplugged/@material-**/node_modules/'
+      // './src',
+      // path.resolve(__dirname, "..", "node_modules"),
+      // path.resolve(__dirname,"node_modules")
+      // './yarn'
+      // ]
     }),
     // litcss({
-    //   include: ['**/*.scss'] 
+    //   include: ['**/*.scss']
     // }),
     // postcssLit(),
-    production && terser({output: {comments: false,source_map:false}}),
+    production && terser({ output: { comments: false, source_map: false } }),
     // litcss({ uglify: true })
+    production &&
+      replace({
+        "process.env.NODE_ENV": JSON.stringify("production"),
+      }),
+    !production &&
+      replace({
+        "process.env.NODE_ENV": JSON.stringify("development"),
+      }),
   ],
   watch: {
-    clearScreen: false
-  }
+    clearScreen: false,
+  },
 };
