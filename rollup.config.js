@@ -4,25 +4,12 @@ import babel from "@rollup/plugin-babel";
 import common from "@rollup/plugin-commonjs";
 import serve from "rollup-plugin-serve";
 import livereload from "rollup-plugin-livereload";
-import bundleScss from "rollup-plugin-bundle-scss";
-// import postcss from 'rollup-plugin-postcss';
-// import postcss from 'rollup-plugin-postcss';
-import postcssLit from "rollup-plugin-postcss-lit";
-import path from "path";
 import { terser } from "rollup-plugin-terser";
-import { Plugin } from "rollup";
-import litcss from "rollup-plugin-lit-css";
-import postcssPresetEnv from "postcss-preset-env";
-// import  atImport from "postcss-import";
-import styles from "rollup-plugin-styles";
 
 import scss from "rollup-plugin-scss";
-import { readdirSync } from "fs";
 import replace from "@rollup/plugin-replace";
 
-// const asdf : Plugin
 
-// import litcss from 'rollup-plugin-lit-css';
 const production = !process.env.ROLLUP_WATCH;
 const extensions = [".js", ".jsx", ".ts", ".tsx", ".m.js"];
 const babelRc = {
@@ -125,21 +112,19 @@ export default {
     livereload({
       watch: "dist",
     }),
-    // postcssLit(),
-    // litcss({include:['**/*.css','**/*.scss'],uglify:true}),
     resolve({ extensions, browser: true }),
     common(
       // {
       // namedExports: {
-        // "node_modules/react/index.js": [
-          // "Children",
-          // "Component",
-          // "PropTypes",
-          // "createElement",
-        // ],
-        // "node_modules/react-dom/index.js": ["render"],
+      // "node_modules/react/index.js": [
+      // "Children",
+      // "Component",
+      // "PropTypes",
+      // "createElement",
+      // ],
+      // "node_modules/react-dom/index.js": ["render"],
       // },
-    // }
+      // }
     ),
     babel(babelConf),
     // //POSTCSS START
@@ -196,32 +181,7 @@ export default {
     //   // extract: true
     // }),
     // POSTCSS END
-    // styles(),
-    // styles({
-    //   // parser: require('sass').renderSync,
-    //   // config:{
-    //   //   ctx:{
-    //   //     extract: false
-    //   //   }
 
-    //   // },
-    //   dts: true,
-    //   extensions: ['.sass',".scss",".css"],
-    //   // modules: false,
-    //   // import: {
-    //   //   resolve: path.resolve(__dirname,"./node_modules")
-    //   // },
-    //   mode: "extract",
-    //   // sass: {
-    //   //   impl: 'sass',
-    //   //   fiber: require('fibers'),
-    //   //   includePaths: [
-    //   //     'node_modules'
-    //   //   ]
-    //   // },
-    //   use: ['sass']
-    // }),
-    //bundleScss(),
     scss({
       // extensions: ['.sass',".scss",".css"],
       // ['/**/*.css', '/**/*.scss', '/**/*.sass']
@@ -246,20 +206,17 @@ export default {
       // './yarn'
       // ]
     }),
-    // litcss({
-    //   include: ['**/*.scss']
-    // }),
-    // postcssLit(),
+
     production && terser({ output: { comments: false, source_map: false } }),
-    // litcss({ uglify: true })
+
     production &&
-      replace({
-        "process.env.NODE_ENV": JSON.stringify("production"),
-      }),
+    replace({
+      "process.env.NODE_ENV": JSON.stringify("production"),
+    }),
     !production &&
-      replace({
-        "process.env.NODE_ENV": JSON.stringify("development"),
-      }),
+    replace({
+      "process.env.NODE_ENV": JSON.stringify("development"),
+    }),
   ],
   watch: {
     clearScreen: false,
