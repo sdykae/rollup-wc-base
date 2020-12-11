@@ -17,13 +17,19 @@
     "importHelpers": true,
     "inlineSources": true,
     "rootDir": "./",
-    "jsx": "react"
-    // "allowJs": true
+    "jsx": "react",
+    "allowJs": true,
+    // "skipLibCheck": true
+    // "allowUmdGlobalAccess": true
   },
   "include": [
+    "**/*.wasm",
     "src",
-    // "src/**/*.tsx",
+    "src/**/*.tsx",
+    "src/**/*.ts",
+    "src/**/*.js",
+    "src/**/*.mjs",
     // "src/*.tsx",
   ],
-  "exclude": []
+  "exclude": ["**/*bg.wasm.d.ts"]
 }

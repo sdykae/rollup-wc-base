@@ -8,10 +8,10 @@ import { terser } from "rollup-plugin-terser";
 
 import scss from "rollup-plugin-scss";
 import replace from "@rollup/plugin-replace";
-
+import { wasm } from '@rollup/plugin-wasm';
 
 const production = !process.env.ROLLUP_WATCH;
-const extensions = [".js", ".jsx", ".ts", ".tsx", ".m.js"];
+const extensions = [".js", ".jsx", ".ts", ".tsx", ".m.js",".mjs"];
 const babelRc = {
   presets: [
     [
@@ -127,6 +127,10 @@ export default {
       // },
       // }
     ),
+    wasm({
+      // sync:['./node_modules/libmee/libmee_bg.wasm']
+      // publicPath: "string"
+    }),
     babel(babelConf),
     // //POSTCSS START
     // postcss({

@@ -4,10 +4,10 @@
         "es6": true,
         "node": true
     },
-    "extends": ["eslint:recommended","prettier"],
+    "extends": ["eslint:recommended","plugin:@typescript-eslint/recommended","plugin:@typescript-eslint/recommended-requiring-type-checking","prettier"],
     "globals": {"Atomics":"readonly","SharedArrayBuffer":"readonly"},
-    "parserOptions": {"ecmaVersion": 2018, "sourceType": "module"},
+    "parserOptions": {"ecmaVersion": 2018, "sourceType": "module", "project":"./tsconfig.json"},
     "rules": {"prettier/prettier":"error"},
-    "plugins": ["prettier"]
-
+    "plugins": ["@typescript-eslint","prettier"],
+    "parser": "@typescript-eslint/parser"
 }
